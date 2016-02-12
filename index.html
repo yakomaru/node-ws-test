@@ -18,13 +18,16 @@
     </style>
 
     <script>
-      var host = location.origin.replace(/^http/, 'ws')
+      var host = location.origin.replace(/^http/, 'ws');
       var ws = new WebSocket(host);
       ws.onmessage = function (event) {
         var li = document.createElement('li');
         li.innerHTML = JSON.parse(event.data);
         document.querySelector('#pings').appendChild(li);
       };
+      setInterval(function(){
+        ws.send('test');
+      }, 1000);
     </script>
   </head>
   <body>
